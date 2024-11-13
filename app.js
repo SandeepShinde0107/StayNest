@@ -28,7 +28,7 @@ const { Server } = require("http");
 
 
 //MOGODB ATLUS Server
-const dbUrl = process.env.ATLAS_URL;
+const dbUrl = process.env.ATLASDB_URL;
 
 main()
 .then(() => {
@@ -93,7 +93,9 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
-
+app.get("/", (req, res) => {
+    res.render("home"); // Ensure views/home.ejs exists
+  });
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page not found!!"));
 }); 
